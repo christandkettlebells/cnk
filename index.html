@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Body Studio | Personal Trainer & Body Shaper</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --text: #f0ece4;
+      --text-muted: #8a8580;
+      --border: rgba(201, 168, 76, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      height: 70px;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 10px 28px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ─── HERO ─── */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
+    }
+    .hero-parallax {
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 20%, rgba(201,168,76,0.05) 0%, transparent 50%);
+      will-change: transform;
+    }
+    .hero-lines {
+      position: absolute; inset: 0; overflow: hidden;
+    }
+    .hero-lines::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border), transparent);
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+      padding: 0 24px;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 48px;
+      max-width: 500px;
+      margin-left: auto; margin-right: auto;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s forwards;
+      line-height: 1.7;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s forwards;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+      padding: 16px 40px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      padding: 16px 40px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid rgba(240,236,228,0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--text); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s 2s infinite;
+    }
+
+    /* ─── SHARED SECTION ─── */
+    section { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::before {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-image-wrapper { position: relative; }
+    .about-image {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-image-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #111 0%, #1a1208 100%);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      gap: 12px;
+    }
+    .about-image-placeholder svg { width: 60px; height: 60px; opacity: 0.3; }
+    .about-frame {
+      position: absolute;
+      top: 20px; left: 20px; right: -20px; bottom: -20px;
+      border: 1px solid var(--border);
+      z-index: -1;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-top: 40px;
+    }
+    .stat-box { background: var(--bg); padding: 24px; text-align: center; }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      display: block; line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    .about-body p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+    .about-body p strong { color: var(--text); font-weight: 500; }
+    .certifications { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .cert-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ─── SERVICES ─── */
+    .services-bg { background: var(--surface); }
+    .services-inner { max-width: 1200px; margin: 0 auto; padding: 120px 60px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 60px;
+    }
+    .service-card {
+      background: var(--surface);
+      padding: 48px 36px;
+      position: relative;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .service-card:hover { background: #161410; }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 36px; right: 36px;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+    .service-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .service-price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); }
+    .service-price span { font-family: 'Outfit', sans-serif; font-size: 0.75rem; color: var(--text-muted); margin-left: 4px; }
+    .featured-badge {
+      position: absolute;
+      top: -1px; right: 32px;
+      background: var(--gold);
+      color: var(--bg);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+    }
+    .gallery-item {
+      aspect-ratio: 3/4;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(8,8,8,0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 8px 20px;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-bg { background: linear-gradient(180deg, var(--bg) 0%, #0d0b07 50%, var(--bg) 100%); }
+    .testimonials-inner { max-width: 1200px; margin: 0 auto; padding: 120px 60px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+    .testimonial-card {
+      border: 1px solid var(--border);
+      padding: 40px 32px;
+      position: relative;
+      transition: border-color 0.3s;
+    }
+    .testimonial-card:hover { border-color: rgba(201,168,76,0.5); }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.3;
+      position: absolute;
+      top: 16px; left: 28px;
+      line-height: 1;
+    }
+    .testimonial-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 28px; margin-top: 24px; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+    }
+    .author-name { font-size: 0.85rem; font-weight: 500; margin-bottom: 2px; }
+    .author-result { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gold); }
+    .stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px; }
+
+    /* ─── CONTACT ─── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+    .contact-detail { margin-bottom: 32px; }
+    .contact-detail-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .contact-detail-value { font-size: 1rem; color: var(--text-muted); }
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      padding: 14px 18px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select option { background: #111; }
+
+    /* ─── PARALLAX DIVIDERS ─── */
+    .parallax-divider {
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .parallax-bg {
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
+      will-change: transform;
+    }
+    .parallax-quote {
+      position: relative;
+      z-index: 2;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-style: italic;
+      text-align: center;
+      padding: 0 60px;
+      color: var(--text-muted);
+    }
+    .parallax-quote strong { color: var(--gold); font-style: normal; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 0.15em; color: var(--gold); }
+    .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.75rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.5; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(0.7); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      .services-inner, .testimonials-inner { padding: 80px 24px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 20px; text-align: center; }
+      .parallax-quote { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav>
+    <a href="#" class="nav-logo">Elite Body Studio</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Results</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a Session</a>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-parallax" id="heroPx"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Personal Training · Body Sculpting · Transformation</p>
+      <h1 class="hero-title">Sculpt Your<br><em>Best Self</em></h1>
+      <p class="hero-subtitle">Elite one-on-one training and body shaping programs designed to transform how you look, move, and feel — for life.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Start Your Journey</a>
+        <a href="#services" class="btn-ghost">View Programs</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-image-wrapper reveal">
+        <div class="about-image">
+          <div class="about-image-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;">Your Photo Here</span>
+          </div>
+        </div>
+        <div class="about-frame"></div>
+        <div class="about-stats">
+          <div class="stat-box">
+            <span class="stat-number">10+</span>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">500+</span>
+            <div class="stat-label">Clients Transformed</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">98%</span>
+            <div class="stat-label">Client Retention</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">15+</span>
+            <div class="stat-label">Certifications</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-body reveal">
+        <div class="section-label">About Your Trainer</div>
+        <h2 class="section-title">Where Science Meets <em>Dedication</em></h2>
+        <p>I'm a certified personal trainer and body transformation specialist with over a decade of experience helping people achieve results they never thought possible. My approach blends <strong>evidence-based training science</strong> with personalized programming tailored to your unique body and goals.</p>
+        <p>Whether you're aiming to lose weight, build lean muscle, recover from injury, or simply feel stronger and more confident — I design every program around <strong>you specifically</strong>, not a generic template.</p>
+        <div class="certifications">
+          <div class="cert-item"><div class="cert-dot"></div>NASM Certified Personal Trainer (CPT)</div>
+          <div class="cert-item"><div class="cert-dot"></div>Precision Nutrition Level 1 Coach</div>
+          <div class="cert-item"><div class="cert-dot"></div>Corrective Exercise Specialist (CES)</div>
+          <div class="cert-item"><div class="cert-dot"></div>Body Composition Specialist</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PARALLAX QUOTE 1 ═══ -->
+  <div class="parallax-divider">
+    <div class="parallax-bg" id="px1"></div>
+    <p class="parallax-quote">"Your body is capable of <strong>anything</strong> — it's your mind you have to convince."</p>
+  </div>
+
+  <!-- ═══ SERVICES ═══ -->
+  <div class="services-bg">
+    <div class="services-inner" id="services">
+      <div class="reveal">
+        <div class="section-label">Programs &amp; Pricing</div>
+        <h2 class="section-title">Investment in <em>Your Transformation</em></h2>
+      </div>
+      <div class="services-grid reveal">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-name">Body Sculpt Starter</div>
+          <p class="service-desc">Perfect for beginners. Four weekly sessions covering foundational movement, nutrition basics, and body composition assessment to establish your transformation baseline.</p>
+          <div class="service-price">$299<span>/ month</span></div>
+        </div>
+        <div class="service-card">
+          <div class="featured-badge">Most Popular</div>
+          <div class="service-num">02</div>
+          <div class="service-name">Elite Transformation</div>
+          <p class="service-desc">Six sessions per month, custom meal planning, weekly progress tracking, body shaping protocols, and unlimited messaging support between sessions.</p>
+          <div class="service-price">$499<span>/ month</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-name">Premium VIP Coaching</div>
+          <p class="service-desc">Total immersion. Daily check-ins, unlimited sessions, advanced body composition analysis, supplement guidance, and priority scheduling. Maximum results, zero compromises.</p>
+          <div class="service-price">$899<span>/ month</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BEFORE & AFTER GALLERY ═══ -->
+  <section id="gallery">
+    <div class="reveal">
+      <div class="section-label">Client Results</div>
+      <h2 class="section-title">Real People. <em>Real Transformations.</em></h2>
+      <p style="color:var(--text-muted);max-width:560px;line-height:1.8;margin-top:16px;font-size:0.95rem;">Results represent real clients who committed fully to the process. Individual results vary based on your starting point, goals, and consistency.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#0f0f0f,#1a1208);">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="gallery-overlay"><div class="gallery-tag">Before / After</div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(160deg,#0f100a,#1a1208);"></div>
+        <div class="gallery-overlay"><div class="gallery-tag">−28 lbs</div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(135deg,#0f0f0e,#120f08);"></div>
+        <div class="gallery-overlay"><div class="gallery-tag">Body Sculpt</div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder" style="background:linear-gradient(120deg,#101008,#1a1208);"></div>
+        <div class="gallery-overlay"><div class="gallery-tag">12 Weeks</div></div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:20px;font-size:0.75rem;color:var(--text-muted);letter-spacing:0.08em;">↑ Replace placeholder boxes with your before/after photos</p>
+  </section>
+
+  <!-- ═══ PARALLAX QUOTE 2 ═══ -->
+  <div class="parallax-divider">
+    <div class="parallax-bg" id="px2"></div>
+    <p class="parallax-quote">Every expert was once a <strong>beginner</strong>. Your time is now.</p>
+  </div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <div class="testimonials-bg">
+    <div class="testimonials-inner" id="testimonials">
+      <div class="reveal">
+        <div class="section-label">Client Stories</div>
+        <h2 class="section-title">What They're <em>Saying</em></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">I lost 32 pounds in 4 months and finally have the energy to keep up with my kids. The program was tailored exactly to my schedule and limitations — I never felt lost or overwhelmed.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div>
+              <div class="author-name">Sarah M.</div>
+              <div class="author-result">Lost 32 lbs in 4 months</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">As someone who has tried every fad diet and gym program out there, I was skeptical. The results speak for themselves — down 3 dress sizes and I've kept it off for over a year.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">J</div>
+            <div>
+              <div class="author-name">Jessica T.</div>
+              <div class="author-result">3 dress sizes smaller</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">The nutrition guidance alone was worth every penny. My body has completely changed and more importantly, my relationship with food and exercise is finally healthy and sustainable.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name">Marcus R.</div>
+              <div class="author-result">Gained 18 lbs lean muscle</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact">
+    <div class="reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Begin Your <em>Transformation</em></h2>
+    </div>
+    <div class="contact-grid" style="margin-top:60px;">
+      <div class="reveal" style="padding-top:12px;">
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:40px;font-size:0.95rem;">Ready to take the first step? Fill out the form and I'll get back to you within 24 hours to schedule your free consultation.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Location</div>
+          <div class="contact-detail-value">Your City, State</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">trainer@elitebody.com</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value">(555) 000-0000</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Hours</div>
+          <div class="contact-detail-value">Mon – Sat · 6:00 AM – 8:00 PM</div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(555) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>I'm Interested In</label>
+          <select>
+            <option>Body Sculpt Starter — $299/mo</option>
+            <option>Elite Transformation — $499/mo</option>
+            <option>Premium VIP Coaching — $899/mo</option>
+            <option>Free Consultation First</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Me About Your Goals</label>
+          <textarea placeholder="What are you hoping to achieve? Any injuries or limitations I should know about?"></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;padding:18px;font-size:0.85rem;" onclick="handleSubmit(this)">
+          Send Message — Let's Get Started
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-logo">Elite Body Studio</div>
+    <p class="footer-copy">© 2025 Elite Body Studio. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Privacy</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Parallax ──
+    const heroPx = document.getElementById('heroPx');
+    const px1    = document.getElementById('px1');
+    const px2    = document.getElementById('px2');
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (heroPx) heroPx.style.transform = `translateY(${y * 0.4}px)`;
+      [px1, px2].forEach(el => {
+        if (el) {
+          const top = el.parentElement.getBoundingClientRect().top;
+          el.style.transform = `translateY(${-top * 0.3}px)`;
+        }
+      });
+    }, { passive: true });
+
+    // ── Scroll Reveal ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Form ──
+    function handleSubmit(btn) {
+      btn.textContent = 'Message Sent ✓ — I\'ll be in touch within 24 hours!';
+      btn.style.cssText += ';background:#1a2e1a;color:#7fc97f;cursor:default;';
+      btn.disabled = true;
+    }
+  </script>
+
+</body>
+</html>
