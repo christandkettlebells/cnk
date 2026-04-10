@@ -420,6 +420,23 @@
     .footer-links a { font-size: 0.75rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
     .footer-links a:hover { color: var(--accent); }
 
+    /* ─── VALUES SLIDER ─── */
+    .values-slider-wrap { margin-top: 80px; }
+    .values-slider-label { font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; display: flex; align-items: center; gap: 16px; }
+    .values-slider-label::before { content: ''; width: 40px; height: 2px; background: var(--accent); border-radius: 2px; }
+    .values-track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; scrollbar-width: none; }
+    .values-track::-webkit-scrollbar { display: none; }
+    .value-card { flex: 0 0 300px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 36px 28px; scroll-snap-align: start; }
+    .value-icon { display: flex; justify-content: center; margin-bottom: 24px; color: var(--text); }
+    .value-icon svg { width: 80px; height: 80px; }
+    .value-body { font-size: 0.88rem; font-weight: 600; color: var(--text); line-height: 1.65; margin-bottom: 18px; }
+    .value-body em { font-style: italic; }
+    .value-scripture { font-style: italic; font-size: 0.8rem; color: var(--text-muted); line-height: 1.75; }
+    .value-ref { font-size: 0.75rem; color: var(--text-muted); font-style: italic; margin-top: 6px; }
+    .values-nav { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+    .values-nav button { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--border-strong); background: transparent; cursor: pointer; font-size: 1rem; color: var(--text); transition: all 0.3s; line-height: 1; }
+    .values-nav button:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
@@ -446,12 +463,22 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Christ &amp; Kettlebells</a>
+    <a href="#" class="nav-logo" style="display:flex;align-items:center;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="54" height="54" style="color:var(--accent);">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <text x="50" y="57" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="900" fill="currentColor">CK</text>
+        <defs><path id="nav-arc" d="M 10,50 A 40,40 0 0,1 90,50"/></defs>
+        <text font-size="6.5" fill="currentColor" font-family="Arial,sans-serif" letter-spacing="1.8" text-anchor="middle">
+          <textPath href="#nav-arc" startOffset="50%">CHRIST &amp; KETTLEBELLS</textPath>
+        </text>
+      </svg>
+    </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
+      <li><a href="#services">Programs</a></li>
       <li><a href="#gallery">Results</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#resources">Resources</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Book a Session</a>
@@ -464,7 +491,7 @@
     <div class="hero-lines"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">Faith Based · Faith First Fitness</p>
-      <h1 class="hero-title" style="font-size:clamp(1.4rem,3.5vw,2.8rem);line-height:1.25;color:var(--blue);">I help Christian women working a 9 to 5 who have tried everything to finally lose the weight and keep it off, get closer to God + live confidently, joyfully, and firmly rooted in faith.</h1>
+      <h1 class="hero-title" style="font-size:clamp(1.4rem,3.5vw,2.8rem);line-height:1.25;color:var(--text);max-width:500px;margin-left:auto;margin-right:auto;">I help Christian women working a 9 to 5 who have tried everything to finally lose the weight and keep it off, get closer to God + live confidently, joyfully, and firmly rooted in faith.</h1>
       <p class="hero-subtitle">Whether you've been at war with your body for years or are just sick and tired of feeling sick and tired, have tried everything already, or have no idea what you're doing, I'll help you ditch what's not working, coach you step-by-step on how to steward the body which the Holy Spirit resides in, so you can finally lose the weight on your body and in your heart.</p>
       <div class="hero-buttons">
         <a href="#services" class="btn-primary">Let's Start Your New Life Today</a>
@@ -493,16 +520,127 @@
       <div class="about-body reveal">
         <div class="section-label">About Your Coach</div>
         <h2 class="section-title">Where <em style="color:var(--accent);font-style:normal;">Faith</em> Meets <em style="color:var(--accent);font-style:normal;">Fitness</em></h2>
-        <p>I'm a certified personal trainer and body transformation specialist with over a decade of experience helping people achieve results they never thought possible. My approach blends <strong>evidence-based training science</strong> with personalized programming tailored to your unique body and goals.</p>
-        <p>Whether you're aiming to lose weight, build lean muscle, recover from injury, or simply feel stronger and more confident — I design every program around <strong>you specifically</strong>, not a generic template.</p>
-        <div class="certifications">
-          <div class="cert-item"><div class="cert-dot"></div>NASM Certified Personal Trainer (CPT)</div>
-          <div class="cert-item"><div class="cert-dot"></div>Precision Nutrition Level 1 Coach</div>
-          <div class="cert-item"><div class="cert-dot"></div>Corrective Exercise Specialist (CES)</div>
-          <div class="cert-item"><div class="cert-dot"></div>Body Composition Specialist</div>
-        </div>
+        <p>In case you're new here, allow me to introduce myself…<br>
+        I'm Alexandra - you can call me Ali though - an online Certified Personal Trainer and Behavior Change Specialist who loves Jesus, and loves helping women love themselves again, who also love Jesus.</p>
+        <p>My goal is to help as many Christian women as possible to build the firm foundation of faith in their health, learn how to steward their bodies in a way that is aligned with God's love for us (I'm pretty sure He doesn't want us to hate ourselves or the way we look!), so they can experience an entirely new level in their relationship with the Lord, of freedom from bondage of self and sin, and enjoy the confidence and consistency they've been seeking.</p>
       </div>
     </div>
+
+    <!-- OUR VALUES SLIDER -->
+    <div class="values-slider-wrap reveal">
+      <div class="values-slider-label">Our Values</div>
+      <div class="values-track" id="valuesTrack">
+
+        <!-- Card 1 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Hair bun -->
+              <circle cx="38" cy="16" r="10"/>
+              <!-- Face profile (facing right) -->
+              <path d="M47,10 Q62,12 64,28 Q70,42 62,58 Q56,68 54,78"/>
+              <path d="M47,10 Q36,14 36,28 Q34,40 40,54 Q46,64 54,78"/>
+              <!-- Flowing hair from bun -->
+              <path d="M47,10 Q42,4 35,6 Q28,8 28,16"/>
+              <path d="M54,16 Q62,10 64,20"/>
+              <!-- Neck -->
+              <path d="M54,78 Q50,88 52,98"/>
+              <path d="M54,78 Q58,86 57,98"/>
+            </svg>
+          </div>
+          <p class="value-body">It is not sinful to care about your health and how you look, or want to be happy in your body. It <em>be</em> IS sinful to do the devil's work for him by destroying the Holy Temple — your body — which the Holy Spirit resides in.</p>
+          <p class="value-scripture">"Do you not know that you are God's temple and that God's Spirit dwells in you? If anyone destroys God's temple, God will destroy him. For God's temple is holy, and you are that temple."</p>
+          <p class="value-ref">— 1 Corinthians 3:16–17</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Plate (outer) -->
+              <circle cx="50" cy="55" r="32"/>
+              <!-- Plate (inner rim) -->
+              <circle cx="50" cy="55" r="22"/>
+              <!-- Knife (left) -->
+              <line x1="12" y1="22" x2="12" y2="82"/>
+              <path d="M12,22 Q18,28 18,40 Q18,52 12,55"/>
+              <!-- Fork (right) -->
+              <line x1="88" y1="50" x2="88" y2="82"/>
+              <line x1="82" y1="22" x2="82" y2="46"/>
+              <line x1="88" y1="22" x2="88" y2="46"/>
+              <line x1="94" y1="22" x2="94" y2="46"/>
+              <path d="M82,46 Q88,52 94,46"/>
+            </svg>
+          </div>
+          <p class="value-body">Stewardship of the body doesn't mean you have to do extreme dieting or exercising, or add to your already busy schedule. There is a proper way to do it that is aligned with God, and <em>actually</em> works.</p>
+          <p class="value-scripture">"Whoever keeps a command will know no evil thing, and the wise heart will know the proper time and the just way. For there is a time and a way for everything, although man's trouble lies heavy on him."</p>
+          <p class="value-ref">— Ecclesiastes 8:5–6</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <!-- Cross -->
+              <line x1="50" y1="8" x2="50" y2="82"/>
+              <line x1="20" y1="32" x2="80" y2="32"/>
+              <!-- Flowing line at base -->
+              <path d="M28,92 Q40,80 50,85 Q60,90 72,82"/>
+            </svg>
+          </div>
+          <p class="value-body">You are <em>already</em> complete, whole, enough and worthy. Not because of what you think about yourself, or what the world says about you, but because <em>Jesus said so</em>, and it was so, when you were baptized and became one with Him in His death and resurrection.</p>
+          <p class="value-scripture">"Whoever keeps a command will know no evil thing, and the wise heart will know the proper time and the just way. For there is a time and a way for everything, although man's trouble lies heavy on him."</p>
+          <p class="value-ref">— Ecclesiastes 8:5–6</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Heart outline -->
+              <path d="M50,85 Q18,65 18,42 Q18,22 34,22 Q44,22 50,32 Q56,22 66,22 Q82,22 82,42 Q82,65 50,85 Z"/>
+              <!-- Cross inside heart -->
+              <line x1="50" y1="34" x2="50" y2="72"/>
+              <line x1="34" y1="50" x2="66" y2="50"/>
+            </svg>
+          </div>
+          <p class="value-body">Our spiritual life must get straightened out before the other areas of our lives — physical, mental, emotional, relational and financial — can get straightened out. Meaning, when we place God at the center of our life and health, everything improves.</p>
+          <p class="value-scripture">"But seek first the kingdom of God and his righteousness, and all these things will be added to you."</p>
+          <p class="value-ref">— Matthew 6:33</p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="value-card">
+          <div class="value-icon">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Light rays -->
+              <line x1="50" y1="6" x2="50" y2="14"/>
+              <line x1="36" y1="9" x2="39" y2="17"/>
+              <line x1="64" y1="9" x2="61" y2="17"/>
+              <line x1="26" y1="18" x2="31" y2="24"/>
+              <line x1="74" y1="18" x2="69" y2="24"/>
+              <!-- Left hand -->
+              <path d="M36,90 Q30,75 28,60 Q26,50 30,46 Q34,42 37,48 L37,38 Q37,33 41,33 Q45,33 45,38 L45,50"/>
+              <!-- Right hand -->
+              <path d="M64,90 Q70,75 72,60 Q74,50 70,46 Q66,42 63,48 L63,38 Q63,33 59,33 Q55,33 55,38 L55,50"/>
+              <!-- Palms connecting -->
+              <path d="M45,50 Q50,46 55,50"/>
+              <path d="M45,50 Q44,65 36,90"/>
+              <path d="M55,50 Q56,65 64,90"/>
+            </svg>
+          </div>
+          <p class="value-body">In order to fulfill the Great Commandment of loving your neighbor as yourself, you must love yourself. We cannot give away what we don't have, and we are able to be of service to others when we take care of ourselves + our health (Mark 12:29-31).</p>
+          <p class="value-scripture">"The most important is, Hear, O Israel: The Lord our God, the Lord is one. And you shall love the Lord your God with all your heart and with all your soul and with all your mind and with all your strength. The second is this: You shall love your neighbor as yourself. There is no other commandment greater than these."</p>
+          <p class="value-ref">— Mark 12:29–31</p>
+        </div>
+
+      </div><!-- end values-track -->
+      <div class="values-nav">
+        <button id="valPrev" aria-label="Previous">&#8592;</button>
+        <button id="valNext" aria-label="Next">&#8594;</button>
+      </div>
+    </div><!-- end values-slider-wrap -->
+
   </section>
 
   <!-- PARALLAX 1 — blue -->
@@ -612,6 +750,15 @@
     </div>
   </div>
 
+  <!-- RESOURCES -->
+  <section id="resources">
+    <div class="reveal">
+      <div class="section-label">Resources</div>
+      <h2 class="section-title">Tools for Your <em>Journey</em></h2>
+      <p style="color:var(--text-muted);max-width:560px;line-height:1.8;margin-top:16px;font-size:0.95rem;">Faith-based resources, guides, and encouragement to support you on your path to health, wholeness, and a deeper walk with God. Coming soon.</p>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="reveal">
@@ -652,7 +799,16 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Christ &amp; Kettlebells</div>
+    <div class="footer-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="54" height="54" style="color:var(--accent);display:block;">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <text x="50" y="57" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="900" fill="currentColor">CK</text>
+        <defs><path id="footer-arc" d="M 10,50 A 40,40 0 0,1 90,50"/></defs>
+        <text font-size="6.5" fill="currentColor" font-family="Arial,sans-serif" letter-spacing="1.8" text-anchor="middle">
+          <textPath href="#footer-arc" startOffset="50%">CHRIST &amp; KETTLEBELLS</textPath>
+        </text>
+      </svg>
+    </div>
     <p class="footer-copy">© 2025 Elite Body Studio. All rights reserved.</p>
     <div class="footer-links">
       <a href="#">Instagram</a>
@@ -686,6 +842,11 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Values slider navigation
+    const valTrack = document.getElementById('valuesTrack');
+    document.getElementById('valPrev').addEventListener('click', () => valTrack.scrollBy({left: -320, behavior: 'smooth'}));
+    document.getElementById('valNext').addEventListener('click', () => valTrack.scrollBy({left: 320, behavior: 'smooth'}));
 
     function handleSubmit(btn) {
       btn.textContent = "Message Sent ✓ — I'll be in touch within 24 hours!";
