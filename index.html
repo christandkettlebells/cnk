@@ -499,6 +499,13 @@
     </div>
   </div>
 
+  <!-- HERO PARALLAX IMAGE PLACEHOLDER -->
+  <div style="position:relative;height:480px;overflow:hidden;">
+    <div id="heroPxImg" style="position:absolute;inset:-20%;background:var(--blue);will-change:transform;display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:'Outfit',sans-serif;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(0,0,0,0.3);">Image Coming Soon</span>
+    </div>
+  </div>
+
   <!-- ABOUT -->
   <section id="about">
     <div class="about-grid">
@@ -802,14 +809,15 @@
   </footer>
 
   <script>
-    const heroPx = document.getElementById('heroPx');
-    const px1    = document.getElementById('px1');
-    const px2    = document.getElementById('px2');
+    const heroPx    = document.getElementById('heroPx');
+    const heroPxImg = document.getElementById('heroPxImg');
+    const px1       = document.getElementById('px1');
+    const px2       = document.getElementById('px2');
 
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       if (heroPx) heroPx.style.transform = `translateY(${y * 0.35}px)`;
-      [px1, px2].forEach(el => {
+      [heroPxImg, px1, px2].forEach(el => {
         if (el) {
           const top = el.parentElement.getBoundingClientRect().top;
           el.style.transform = `translateY(${-top * 0.28}px)`;
